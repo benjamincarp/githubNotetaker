@@ -1,5 +1,8 @@
 var React = require('react-native');
 var Profile = require('./Profile');
+var Repositories = require('./Repositories');
+var api = require('../Utils/api');
+
 var {
     Text,
     View,
@@ -30,7 +33,7 @@ class Dashboard extends React.Component{
             alignSelf: 'stretch',
             justifyContent: 'center',
             flex: 1
-        }
+        };
 
         if(btn === 0){
             obj.backgroundColor = '#48BBEC';
@@ -58,7 +61,14 @@ class Dashboard extends React.Component{
     }
 
     goToRepos(){
-        console.log('Going to Repos');
+        api.getRepos(this.props.userInfo.login)
+            .then((res) => {
+                this.props.navigator.push({
+                    title: "Repositories Page",
+                    component: Repositories,
+                    passProps: {userInfo: this.props.userInfo, repos: res}
+                });
+            });
     }
 
     render(){
