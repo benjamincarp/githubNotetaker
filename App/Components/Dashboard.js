@@ -1,6 +1,7 @@
 var React = require('react-native');
 var Profile = require('./Profile');
 var Repositories = require('./Repositories');
+var Notes = require('./Notes');
 var api = require('../Utils/api');
 
 var {
@@ -50,21 +51,29 @@ class Dashboard extends React.Component{
 
     goToProfile(){
         this.props.navigator.push({
-            title: "Profile Page",
+            title: "Profile",
             component: Profile,
             passProps: {userInfo: this.props.userInfo}
         });
     }
 
     goToNotes(){
-        console.log('Going to Notes');
+        api.getNotes(this.props.userInfo.login)
+            .then((res) => {
+                res = res || {};
+                this.props.navigator.push({
+                    title: "Notes",
+                    component: Notes,
+                    passProps: {userInfo: this.props.userInfo, notes: res}
+                });
+            });
     }
 
     goToRepos(){
         api.getRepos(this.props.userInfo.login)
             .then((res) => {
                 this.props.navigator.push({
-                    title: "Repositories Page",
+                    title: "Repositories",
                     component: Repositories,
                     passProps: {userInfo: this.props.userInfo, repos: res}
                 });

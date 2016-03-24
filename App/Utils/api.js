@@ -17,7 +17,7 @@ var api = {
         return fetch(url).then((res) => res.json());
     },
 
-    addNotes(username, note){
+    addNote(username, note){
         username = username.toLowerCase().trim();
         var url = `https://ghsave.firebaseio.com/${username}.json`;
         return fetch(url, {
