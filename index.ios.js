@@ -4,12 +4,12 @@
  */
 
 import React, {
-  AppRegistry,
-  Component,
-  StyleSheet,
-  Text,
-  NavigatorIOS,
-  View
+    AppRegistry,
+    Component,
+    StyleSheet,
+    Text,
+    NavigatorIOS,
+    View
 } from 'react-native';
 
 var Main = require('./App/Components/Main');
@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
 class githubNotetaker extends Component {
   render() {
     return (
-      <NavigatorIOS
-        style = {styles.container}
-        initialRoute = {{
-          title: 'Github Notetaker',
+        <NavigatorIOS
+            style = {styles.container}
+            initialRoute = {{
+      title: 'Github Notetaker',
           component: Main
-        }} />
+    }} />
     );
   }
 }
